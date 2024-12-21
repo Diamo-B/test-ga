@@ -22,3 +22,7 @@
                 with:
                   name: test-file
                   path: test.txt
+              
+              - name: Set branch output
+                id: set-branch
+                run: echo "branch_name=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
