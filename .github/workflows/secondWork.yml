@@ -18,5 +18,11 @@ jobs:
             - name: show branch name
               run: echo "Branch name is ${{ github.event.workflow_run.head_branch }}"
 
+            - name: download test file
+              uses: actions/download-artifact@v2
+              with:
+                name: test-file
+                path: .
+
             - name: show file
               run: cat test.txt
