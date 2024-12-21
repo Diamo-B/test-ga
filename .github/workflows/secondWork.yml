@@ -10,13 +10,24 @@ jobs:
     testJob:
         runs-on: ubuntu-latest
         steps:
+            - name: Debug workflow run context
+              run: |
+                echo "Workflow run head SHA: ${{ github.event.workflow_run.head_sha }}"
+                echo "Workflow run head branch: ${{ github.event.workflow_run.head_branch }}"
+                echo "Current SHA: ${{ github.sha }}"
+                echo "Event SHA: ${{ github.event.workflow_run.head_commit.id }}"
+
             - name: Checkout
               uses: actions/checkout@v4
               with:
-                ref: ${{ github.event.workflow_run.head_branch }}
+                fetch-depth: 0  # Fetch all history
+                ref: ${{ github.event.workflow_run.head_sha }}
             
-            - name: show branch name
-              run: echo "Branch name is ${{ github.event.workflow_run.head_branch }}"
+            - name: Verify checkout
+              run: |
+                git rev-parse HEAD
+                git branch --show-current
+                git log -1 --format='%H %D'
 
             - name: download test file
               uses: actions/download-artifact@v4
