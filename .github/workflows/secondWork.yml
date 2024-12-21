@@ -1,0 +1,22 @@
+name: Child workflow
+
+on:
+  workflow_run:
+    workflows: ["Parent Workflow"]
+    types:
+      - completed
+
+jobs:
+    testJob:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+              with:
+                ref: ${{ github.event.workflow_run.head_branch }}
+            
+            - name: show branch name
+              run: echo "Branch name is ${{ github.event.workflow_run.head_branch }}"
+
+            - name: show file
+              run: cat test.txt
