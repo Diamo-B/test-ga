@@ -1,0 +1,14 @@
+name: Parent Workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+    testJob:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+            
+            - name: create a test file
+              run: echo "Hello World" > test.txt
