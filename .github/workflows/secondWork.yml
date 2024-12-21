@@ -17,11 +17,10 @@ jobs:
                 echo "Current SHA: ${{ github.sha }}"
                 echo "Event SHA: ${{ github.event.workflow_run.head_commit.id }}"
 
-            - name: Checkout
+            - name: Checkout code
               uses: actions/checkout@v4
               with:
-                fetch-depth: 0  # Fetch all history
-                ref: ${{ github.event.workflow_run.head_sha }}
+                ref: ${{ github.event.workflow_run.head_branch }}
             
             - name: Verify checkout
               run: |
