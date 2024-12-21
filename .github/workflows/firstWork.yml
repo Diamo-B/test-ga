@@ -1,24 +1,24 @@
-name: Parent Workflow
+  name: Parent Workflow
 
-on:
-  workflow_dispatch:
-  pull_request:
-    branches:
-      - main
-    types: [opened]
+  on:
+    workflow_dispatch:
+    pull_request:
+      branches:
+        - main
+      types: [opened]
 
-jobs:
-    testJob:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v4
-            
-            - name: create a test file
-              run: echo "Hello World" > test.txt
-            
-            - name: upload test file
-              uses: actions/upload-artifact@v4
-              with:
-                name: test-file
-                path: test.txt
+  jobs:
+      testJob:
+          runs-on: ubuntu-latest
+          steps:
+              - name: Checkout
+                uses: actions/checkout@v4
+              
+              - name: create a test file
+                run: echo "Hello World" > test.txt
+              
+              - name: upload test file
+                uses: actions/upload-artifact@v4
+                with:
+                  name: test-file
+                  path: test.txt
